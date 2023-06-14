@@ -7,6 +7,7 @@ import com.dndappbackend.repository.GameRepository;
 import com.dndappbackend.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,13 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    public ResponseEntity<?> loginUser(User userData) {
+        User user = userRepository.findByFirstname(userData.getFirstname());
+        if (user.getPassword().equals(userData.getPassword()))
+            return ResponseEntity.ok(user);
+        return (ResponseEntity<?>) ResponseEntity.internalServerError();
+    }
 
     public List<User> findAllUsers(){
         return userRepository.findAll();

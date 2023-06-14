@@ -47,10 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-              //  .antMatchers("/").permitAll()
+            //    .antMatchers("/**").permitAll();
                 .antMatchers("/game/**").hasAuthority("ADMIN")
-                .antMatchers("/user/userinfo/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/user/**").hasAuthority("ADMIN");
+                .antMatchers("/user/login").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/user/userinfo").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/user/admin").hasAuthority("ADMIN");
 //                .antMatchers("/**").permitAll()
 
     }

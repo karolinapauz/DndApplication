@@ -18,7 +18,6 @@ import java.util.List;
 public class GameService {
 
     private final GameRepository gameRepository;
-    private final UserRepository userRepository;
 
     public List<Game> getAllGames(){
         log.info("All games for ADMIN");
